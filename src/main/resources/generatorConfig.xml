@@ -55,7 +55,7 @@
             <property name="enableSubPackages" value=""/>
         </javaClientGenerator>
 
-        <table tableName="aml_submit_log_and_material" domainObjectName="amlInternalControlRegulation" enableCountByExample="false"
+        <table tableName="aml_submit_log_and_material" domainObjectName="AmlInternalControlRegulation" enableCountByExample="false"
             enableDeleteByExample="false" enableSelectByExample="false"
             enableUpdateByExample="false">
         </table>

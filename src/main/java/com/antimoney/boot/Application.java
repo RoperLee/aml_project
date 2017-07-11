@@ -15,7 +15,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 
 
 @SpringBootApplication
-@MapperScan("com.computer.boot.mapper")
+@MapperScan("com.antimoney.boot.mapper")
 public class Application {
     private static Logger logger = Logger.getLogger(Application.class);
 
