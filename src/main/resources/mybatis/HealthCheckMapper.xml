@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.computer.boot.mapper.HealthCheckMapper">
+<mapper namespace="com.antimoney.boot.mapper.HealthCheckMapper">
 
-    <resultMap type="com.computer.boot.model.HealthCheck" id="HealthCheck">
+    <resultMap type="com.antimoney.boot.model.HealthCheck" id="HealthCheck">
         <result property="id" column="ID"/>
         <result property="name" column="NAME"/>
         <result property="age" column="AGE"/>
