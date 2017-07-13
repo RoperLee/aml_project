@@ -16,7 +16,6 @@ public class XLSUtil {
     private HSSFWorkbook wb;
     private HSSFSheet sheet;
     private HSSFRow row;
-//    private XSSFWorkbook wb;
 
     /**
      * 读取Excel表格表头的内容
@@ -37,7 +36,6 @@ public class XLSUtil {
         System.out.println("colNum:" + colNum);
         String[] title = new String[colNum];
         for (int i = 0; i < colNum; i++) {
-            //title[i] = getStringCellValue(row.getCell((short) i));
             title[i] = getCellFormatValue(row.getCell((short) i));
         }
         return title;

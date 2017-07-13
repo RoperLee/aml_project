@@ -5,13 +5,11 @@ import com.antimoney.boot.model.FileModel;
 import com.antimoney.boot.service.FileUploadServiceFacade;
 import com.antimoney.boot.utils.XLSXUtil;
 import org.springframework.stereotype.Service;
-import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -44,10 +42,10 @@ public class FileUploadService implements FileUploadServiceFacade {
                 file.getParentFile().mkdirs();
             }
 
-            FileCopyUtils.copy(mpf.getBytes(), new FileOutputStream(aimDir));
+//            FileCopyUtils.copy(mpf.getBytes(), new FileOutputStream(aimDir));
 
             if (fileType.equalsIgnoreCase("xlsx")) {
-                fileModel.setXlsModel(new XLSXUtil().getFromPath(fileModel.getFilePath()));
+                fileModel.setXlsModel(new XLSXUtil().getFromStream(mpf.getInputStream()));
             }
 
             files.add(fileModel);

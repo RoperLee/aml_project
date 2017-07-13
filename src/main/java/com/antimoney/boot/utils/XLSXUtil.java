@@ -29,15 +29,10 @@ public class XLSXUtil {
     /**
      * 读取Excel表格表头的内容
      *
-     * @param is
+     * @param wb
      * @return String 表头内容的数组
      */
-    public String[] readExcelTitle(InputStream is) {
-        try {
-            wb = new XSSFWorkbook(is);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public String[] readExcelTitle(XSSFWorkbook wb) {
         sheet = wb.getSheetAt(0);
         row = sheet.getRow(0);
         // 标题总列数
@@ -45,7 +40,6 @@ public class XLSXUtil {
         System.out.println("colNum:" + colNum);
         String[] title = new String[colNum];
         for (int i = 0; i < colNum; i++) {
-            //title[i] = getStringCellValue(row.getCell((short) i));
             title[i] = getCellFormatValue(row.getCell((short) i));
         }
         return title;
@@ -54,17 +48,11 @@ public class XLSXUtil {
     /**
      * 读取Excel数据内容
      *
-     * @param is
+     * @param wb
      * @return Map 包含单元格数据内容的Map对象
      */
-    public ArrayList<List> readExcelContent(InputStream is) {
-//        Map<Integer, List> content = new HashMap<Integer, List>();
+    public ArrayList<List> readExcelContent(XSSFWorkbook wb) {
         ArrayList<List> content=new ArrayList<>();
-        try {
-            wb = new XSSFWorkbook(is);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
         sheet = wb.getSheetAt(0);
         // 得到总行数
         int rowNum = sheet.getLastRowNum();
@@ -202,12 +190,17 @@ public class XLSXUtil {
     }
 
     public XLSModel getFromStream(InputStream is) {
+        try {
+            wb = new XSSFWorkbook(is);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         XLSModel model = new XLSModel();
         XLSXUtil excelReader = new XLSXUtil();
-        String[] title = excelReader.readExcelTitle(is);
+        String[] title = excelReader.readExcelTitle(wb);
         model.setTitle(title[0]);
-//        Map<Integer, List> map = excelReader.readExcelContent(is);
-        ArrayList<List> list=excelReader.readExcelContent(is);
+        ArrayList<List> list=excelReader.readExcelContent(wb);
         model.setContent(list);
         return model;
     }
@@ -215,13 +208,7 @@ public class XLSXUtil {
     public XLSModel getFromPath(String path) throws FileNotFoundException {
         XLSModel model = new XLSModel();
         InputStream is = new FileInputStream(path);
-        XLSXUtil excelReader = new XLSXUtil();
-        String[] title = excelReader.readExcelTitle(is);
-        model.setTitle(title[0]);
-        ArrayList<List> list=excelReader.readExcelContent(new FileInputStream(path));
-        model.setContent(list);
-
-        return model;
+        return getFromStream(is);
     }
 
     public static void main(String[] args) {
@@ -232,24 +219,5 @@ public class XLSXUtil {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-//        try {
-//            // 对读取Excel表格标题测试
-//            InputStream is = new FileInputStream(path);
-//            XLSXUtil excelReader = new XLSXUtil();
-//            String[] title = excelReader.readExcelTitle(is);
-//            System.out.println("获得Excel表格的标题:");
-//            for (String s : title) {
-//                System.out.print(s + " ");
-//            }
-//            System.out.println();
-//            // 对读取Excel表格内容测试
-//            InputStream is2 = new FileInputStream(path);
-//            Map<Integer, List> map = excelReader.readExcelContent(is2);
-//            JSONObject jsonObject = (JSONObject) JSONObject.toJSON(map);
-//            System.out.println("object:" + jsonObject.toString());
-//        } catch (FileNotFoundException e) {
-//            System.out.println("未找到指定路径的文件!");
-//            e.printStackTrace();
-//        }
     }
 }
