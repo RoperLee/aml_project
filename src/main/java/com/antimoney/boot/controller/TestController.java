@@ -18,6 +18,8 @@ public class TestController {
     @RequestMapping(value="/test",method = RequestMethod.GET)
     @ResponseBody
     public String test(){
+        int newPath;
         return "success";
+
     }
 }
