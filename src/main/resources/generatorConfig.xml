@@ -55,7 +55,7 @@
             <property name="enableSubPackages" value=""/>
         </javaClientGenerator>
 
-        <table tableName="aml_attachment_type" domainObjectName="AttachmentType" enableCountByExample="false"
+        <table tableName="aml_transfer_report" domainObjectName="TransferReport" enableCountByExample="false"
             enableDeleteByExample="false" enableSelectByExample="false"
             enableUpdateByExample="false">
         </table>
