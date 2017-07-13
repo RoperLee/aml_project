@@ -1,5 +1,6 @@
 package com.antimoney.boot.controller;
 
+import com.antimoney.boot.service.impl.FileUploadService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,11 +14,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class TestController {
     @Autowired
-
+private FileUploadService fileUploadService;
 
     @RequestMapping(value="/test",method = RequestMethod.GET)
     @ResponseBody
     public String test(){
+        int i;
         return "success";
     }
+
 }
